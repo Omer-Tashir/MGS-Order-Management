@@ -1,0 +1,128 @@
+@import "@angular/material/prebuilt-themes/purple-green.css";
+
+* {
+  font-family: "Rubik", sans-serif;
+  font-weight: bold;
+  text-decoration: none;
+  outline: none;
+  color: #492901;
+  overflow-wrap: break-word;
+  letter-spacing: 1px !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Rubik", sans-serif !important;
+  font-weight: bold !important;
+}
+
+body {
+  margin: auto;
+  overflow-x: hidden;
+}
+
+div,
+span {
+  font-size: 16px;
+}
+
+table,
+.mat-paginator,
+.mat-select-panel,
+.mat-option {
+  border-collapse: collapse;
+  background: white !important;
+  td.mat-cell {
+    padding: 15px 0;
+  }
+  tr.mat-row,
+  tr.mat-footer-row {
+    cursor: pointer;
+  }
+  tr.mat-row:hover,
+  tr.mat-footer-row:hover {
+    background-color: #49290112;
+  }
+  .mat-header-cell,
+  th.mat-header-cell,
+  .mat-cell,
+  .mat-footer-cell {
+    color: #492901;
+    border-bottom: 1px solid rgb(0 0 0 / 14%);
+    div {
+      color: #492901;
+      font-size: 16px;
+    }
+  }
+  th.mat-header-cell {
+    font-size: 16px;
+  }
+}
+
+img {
+  display: block;
+  margin: auto;
+  object-fit: contain;
+  object-position: center;
+  transition: opacity 0.2s linear;
+  opacity: 1;
+}
+
+.mat-autocomplete-panel,
+.mat-autocomplete-panel .mat-option {
+  background: #ffffff !important;
+}
+
+.mat-input-element {
+  caret-color: #492901;
+}
+
+.mat-form-field-label {
+  color: #492901 !important;
+}
+
+.mat-form-field-underline {
+  background-color: #492901 !important;
+}
+
+.mat-form-field-ripple {
+  background-color: #492901 !important;
+}
+
+.mat-form-field-infix {
+  width: unset !important;
+}
+
+.mat-button {
+  background: #a7ce39;
+}
+
+.mat-button.mat-primary.mat-button-disabled,
+.mat-button.mat-accent.mat-button-disabled,
+.mat-button.mat-warn.mat-button-disabled,
+.mat-button.mat-button-disabled.mat-button-disabled,
+.mat-icon-button.mat-primary.mat-button-disabled,
+.mat-icon-button.mat-accent.mat-button-disabled,
+.mat-icon-button.mat-warn.mat-button-disabled,
+.mat-icon-button.mat-button-disabled.mat-button-disabled,
+.mat-stroked-button.mat-primary.mat-button-disabled,
+.mat-stroked-button.mat-accent.mat-button-disabled,
+.mat-stroked-button.mat-warn.mat-button-disabled,
+.mat-stroked-button.mat-button-disabled.mat-button-disabled {
+  opacity: 0.5;
+}
+
+@media screen and (max-width: 600px) {
+  div,
+  span,
+  .mat-header-cell,
+  th.mat-header-cell,
+  .mat-cell,
+  .mat-footer-cell {
+    font-size: 14px !important;
+  }
+}

@@ -1,0 +1,40 @@
+<div class="login-page">
+  <div class="login-container" [@fadeInOnEnter]>
+    <div class="login-title-container">
+      <img [src]="logo" class="logo" />
+      <p class="logo-line">Fed Cow</p>
+    </div>
+
+    <div class="grid-container">
+      <div class="login-form-wrapper">
+        <form [formGroup]="formGroup" class="login-form" autocomplete="off">
+          <h1 class="form-title">התחברות לאתר</h1>
+
+          <mat-form-field>
+            <span class="prefix" matPrefix>
+              <mat-icon>{{ icons.email }}</mat-icon>
+            </span>
+            <mat-label class="email">אימייל</mat-label>
+            <input matInput formControlName="email" autocomplete="off" spellcheck="false" />
+            <mat-error *ngIf="hasError('email', 'email')">כתובת לא תקינה</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <span class="prefix" matPrefix>
+              <mat-icon>{{ icons.password }}</mat-icon>
+            </span>
+            <mat-label class="password">סיסמא</mat-label>
+            <input matInput type="password" formControlName="password" autocomplete="off" spellcheck="false" />
+          </mat-form-field>
+
+          <div class="form-footer">
+            <button mat-raised-button (click)="submit()" color="primary" [disabled]="!formGroup.valid || isLoading==true">
+              התחבר
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="aside-image background-1"></div>
+    </div>
+  </div>
+</div>
