@@ -1,0 +1,11 @@
+<div class="customer-page" [@fadeInOnEnter]>
+
+    <h1 class="form-title">דף לקוח</h1>
+
+    <div class="customer-form">
+        <button mat-raised-button color="primary" [routerLink]="['/customer', 'details']">הפרטים שלי</button>
+        <button mat-raised-button color="primary" [routerLink]="['/customer', 'orders']">ההזמנות שלי</button>
+        <button mat-raised-button color="primary" [routerLink]="['/products']">המוצרים שלי</button>
+        <button mat-raised-button color="primary" class="back-btn">חזור</button>
+    </div>
+</div>

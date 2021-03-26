@@ -2,13 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule, Router } from '@angular/router';
 
 import { AuthService } from './auth/auth.service';
-import { isLoggedInGuard } from './auth/auth.guard';
-
-import { HomeComponent } from './home/home.component';
+import { isCustomerGuard, isLoggedInGuard } from './auth/auth.guard';
+import { CustomerHomeComponent } from './customer-home/customer-home.component';
+import { ProductsComponent } from './products/products.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/orders', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent, canActivate: [isLoggedInGuard] },
+  { path: '', redirectTo: '/pre-login', pathMatch: 'full' },
+  { path: 'customer-home', component: CustomerHomeComponent, canActivate: [isLoggedInGuard, isCustomerGuard] },
+  { path: 'products', component: ProductsComponent, canActivate: [isLoggedInGuard, isCustomerGuard] },
 ];
 
 @NgModule({

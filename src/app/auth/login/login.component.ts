@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { fadeInOnEnterAnimation } from 'angular-animations';
 
@@ -11,20 +11,28 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.component.css'],
   animations: [fadeInOnEnterAnimation()],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   logo: string = 'assets/logo.png';
   background: string = 'assets/backgroud.png';
   isLoading: boolean = false;
   formGroup: FormGroup;
+  loginType: string = '';
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private authService: AuthService
   ) {
     this.formGroup = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+  }
+
+  ngOnInit(): void {
+    this.route.params.subscribe(params=>{
+      this.loginType = params['type'];
     });
   }
 
@@ -45,9 +53,14 @@ export class LoginComponent {
         this.formGroup.get('password')?.value
       )
       .then((user) => {
-        this.router.navigate(['home']);
+        if(this.loginType=='customers') {
+          this.router.navigate(['/customer-home']);
+        }
+        else {
+        }
       })
       .catch((error) => {
+        alert('שם המשתמש והסיסמה אינם נכונים')
         console.log(error);
         this.isLoading = false;
       });

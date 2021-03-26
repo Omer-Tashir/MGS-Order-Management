@@ -1,64 +1,11 @@
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-mat-form-field:-webkit-autofill,
-mat-form-field:-webkit-autofill:hover,
-mat-form-field:-webkit-autofill:focus,
-.mat-form-field-flex:-webkit-autofill,
-.mat-form-field-flex:-webkit-autofill:hover,
-.mat-form-field-flex:-webkit-autofill:focus,
-.mat-form-field-infix:-webkit-autofill,
-.mat-form-field-infix:-webkit-autofill:hover,
-.mat-form-field-infix:-webkit-autofill:focus {
-  -webkit-text-fill-color: #f26a76 !important;
-}
-
 .login-page {
   position: fixed;
-  top: 40%;
+  top: 50%;
   left: 50%;
   /* bring your own prefixes */
   transform: translate(-50%, -50%);
-  width: 90vw;
-}
-
-.login-container .login-title-container {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row-reverse;
-  position: absolute;
-  left: 45px;
-  top: 45px;
-}
-
-.login-container img {
-  width: 60px;
-  border: 3px solid #4c4726;
-  box-shadow: -2px 2px 2px #4c47267a;
-  border-radius: 1000px;
-  margin-bottom: 15px;
-  background: #e8fac79c;
-}
-
-.login-container .logo-line {
-  font-size: 21px;
-  text-transform: uppercase;
-  letter-spacing: 2px !important;
-  font-weight: bold;
-  text-align: center;
-  color: #4c4726;
-  text-shadow: -1px 2px 0px #e8fac7;
-  position: relative;
-    top: 23px;
-    right: -12px;
-}
-
-.logo-line {
-  color: #0b2242;
-}
-
-.login-container {
-  margin: 30px;
+  width: 50%;
+  min-width: 300px;
 }
 
 .login-form-wrapper {
@@ -70,13 +17,7 @@ mat-form-field:-webkit-autofill:focus,
 }
 
 .login-form {
-  width: 300px;
-  position: relative;
   padding: 2vw 5vw;
-  margin: auto;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 mat-form-field {
@@ -104,16 +45,8 @@ mat-form-field input {
 }
 
 .grid-container {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-}
-
-.aside-image {
   width: 100%;
-  height: 100%;
-  background-position: bottom;
-  background-size: cover;
-  background-repeat: no-repeat;
+  margin: auto;
 }
 
 .form-footer button {
@@ -121,24 +54,9 @@ mat-form-field input {
 }
 
 .form-title {
-  font-weight: bold;
-  margin: 0;
-  margin-bottom: 5px;
-}
-
-.sign-up {
-  margin-bottom: 50px;
-  font-size: 12px;
-}
-
-.sign-up a {
-  font-weight: bold;
-  color: #726f56;
-}
-
-.sign-up a:hover {
-  cursor: pointer;
-  text-decoration: underline;
+  text-align: center;
+  font-weight: bold !important;
+  margin-bottom: 30px;
 }
 
 mat-form-field {

@@ -7,4 +7,6 @@ export class Item {
     Size!: number;
     Color!: string;
     Category!: string;
+    Image!: string;
+    Name!: string;
 }

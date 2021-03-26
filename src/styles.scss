@@ -5,9 +5,10 @@
   font-weight: bold;
   text-decoration: none;
   outline: none;
-  color: #492901;
+  color: black;
   overflow-wrap: break-word;
   letter-spacing: 1px !important;
+  transition: all 0.5s ease;
 }
 
 h1,
@@ -23,6 +24,7 @@ h6 {
 body {
   margin: auto;
   overflow-x: hidden;
+  background-color: #C5C5C5;
 }
 
 div,
@@ -30,12 +32,27 @@ span {
   font-size: 16px;
 }
 
+mat-form-field {
+  * {
+    color: black;
+  }
+}
+
+.back-btn span {
+  color: white;
+  font-weight: bold;
+}
+
+.mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary {
+  background: #b4b4b4;
+}
+
 table,
 .mat-paginator,
 .mat-select-panel,
 .mat-option {
   border-collapse: collapse;
-  background: white !important;
+  background: black !important;
   td.mat-cell {
     padding: 15px 0;
   }
@@ -43,18 +60,14 @@ table,
   tr.mat-footer-row {
     cursor: pointer;
   }
-  tr.mat-row:hover,
-  tr.mat-footer-row:hover {
-    background-color: #49290112;
-  }
   .mat-header-cell,
   th.mat-header-cell,
   .mat-cell,
   .mat-footer-cell {
-    color: #492901;
+    color: black;
     border-bottom: 1px solid rgb(0 0 0 / 14%);
     div {
-      color: #492901;
+      color: black;
       font-size: 16px;
     }
   }
@@ -74,23 +87,26 @@ img {
 
 .mat-autocomplete-panel,
 .mat-autocomplete-panel .mat-option {
-  background: #ffffff !important;
+  background: black !important;
 }
 
 .mat-input-element {
-  caret-color: #492901;
+  caret-color: black;
 }
 
 .mat-form-field-label {
-  color: #492901 !important;
+  color: black !important;
 }
 
-.mat-form-field-underline {
-  background-color: #492901 !important;
-}
-
+.mat-form-field-underline,
 .mat-form-field-ripple {
-  background-color: #492901 !important;
+  background-color: black !important;
+}
+
+.navbar {
+  .mat-form-field-underline, .mat-form-field-ripple {
+    background-color: white !important;
+  }
 }
 
 .mat-form-field-infix {
@@ -98,7 +114,11 @@ img {
 }
 
 .mat-button {
-  background: #a7ce39;
+  background: red;
+}
+
+.mat-error {
+  font-size: 12px;
 }
 
 .mat-button.mat-primary.mat-button-disabled,

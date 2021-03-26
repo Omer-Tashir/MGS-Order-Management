@@ -99,3 +99,37 @@ export class isAgentGuard implements CanActivate {
     });
   }
 }
+
+@Injectable({
+  providedIn: 'root',
+})
+export class isCustomerGuard implements CanActivate {
+  constructor(private db: DatabaseService, private afAuth: AngularFireAuth) {}
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.afAuth.authState.subscribe(
+        (user) => {
+          if (user && user != null) {
+            this.db.getCustomers().subscribe((customers: any[]) => {
+              customers.find(c=>c.Customer_Id == user.uid) ? resolve(true) : reject(false);
+            },
+            (error) => {
+              console.log(error);
+              reject(false);
+            });
+          } 
+          else {
+            reject(false);
+          }
+        },
+        (error) => {
+          console.log(error);
+          reject(error);
+        }
+      );
+    });
+  }
+}

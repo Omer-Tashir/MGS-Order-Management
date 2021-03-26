@@ -1,0 +1,68 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background: black;
+
+    .logo {
+        width: 100px;
+        margin: 0 5px 0 0;
+    }
+
+    .title {
+        text-align: center;
+        width: 100%;
+        color: white;
+        font-weight: bold !important;
+        margin: 0;
+    }
+
+    .search-box {
+        display: flex;
+        vertical-align: middle;
+        justify-content: center;
+        width: 400px;
+        gap: 5px;
+        align-items: center;
+        margin: 0 10px;
+
+        .search {
+            margin-left: 10px;
+
+            mat-icon {
+                color: white;
+                position: relative;
+                top: 6px;
+            }
+        }
+    }
+
+    mat-icon {
+        color: white;
+        fill: transparent;
+        cursor: pointer;
+    }
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    line-height: 50px;
+    border: 1px solid;
+
+    a {
+        cursor: pointer;
+        width: 100%;
+        text-align: center;
+        border-left: 1px solid;
+    }
+}
+
+mat-form-field {
+    * {
+      color: white;
+    }
+}

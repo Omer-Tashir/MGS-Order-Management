@@ -32,6 +32,6 @@ export class AuthService {
     }
 
     this.afAuth.signOut();
-    this.router.navigate(['login']);
+    this.router.navigate(['pre-login']);
   }
 }

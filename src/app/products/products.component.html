@@ -1,0 +1,26 @@
+<div class="products">
+    <div class="product" *ngFor="let product of (products$ | async)">
+        <mat-card>
+
+            <mat-card-header>
+              <mat-card-title>{{product.Name}}</mat-card-title>
+              <mat-card-subtitle>{{product.Category}}</mat-card-subtitle>
+            </mat-card-header>
+
+            <img mat-card-image [src]="product.Image" alt="{{product.Name}}">
+
+            <mat-card-content>
+                <p>ברקוד: {{product.Barcode}}</p>
+                <p>מחיר ליחידה: {{product.Price | currency: 'ILS'}}</p>
+                <p>מידה: {{product.Size}}</p>
+                <p>צבע: {{product.Color}}</p>
+                <p>כמות במלאי: {{product.Quantity}}</p>
+            </mat-card-content>
+
+            <mat-card-actions>
+              <button mat-raised-button color="primary">הוסף לסל</button>
+            </mat-card-actions>
+
+          </mat-card>
+    </div>
+</div>

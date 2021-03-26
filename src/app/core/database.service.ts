@@ -8,6 +8,7 @@ import { Order } from '../models/order';
 import { Customer } from '../models/customer';
 import { Manager } from '../models/manager';
 import { Agent } from '../models/agent';
+import { Item } from '../models/item';
 
 @Injectable({
   providedIn: 'root',
@@ -16,15 +17,42 @@ export class DatabaseService {
   constructor(private db: AngularFirestore) {}
 
   getCustomers(): Observable<Customer[]> {
-    return this.db.collection(`customers`).get().pipe(
+    return this.db.collection(`Customer`).get().pipe(
       map(customers => customers.docs.map(doc => {
         let data: any = doc.data();
         return Object.assign(new Customer(), {
           Customer_Id: doc.id,
           Agent_Id: data.agent_id,
+          User_Name: data.user_name,
+          Password: data.password,
+          Name: data.name,
+          Phone_Num: data.phone_num,
+          Email: data.email,
           Region: data.region,
           Type: data.type,
-          Discount: data.discount
+          Discount: data.discount,
+        });
+      })),
+      catchError(err => of([])),
+      shareReplay()
+    );
+  }
+
+  getItems(): Observable<Item[]> {
+    return this.db.collection(`Item`).get().pipe(
+      map(items => items.docs.map(doc => {
+        let data: any = doc.data();
+        return Object.assign(new Item(), {
+          Barcode: doc.id,
+          Quantity: data.quantity,
+          Price: data.price,
+          Class: data.class,
+          Catalog_Num: data.catalog_num,
+          Size: data.size,
+          Color: data.color,
+          Category: data.category,
+          Image: data.image,
+          Name: data.name,
         });
       })),
       catchError(err => of([])),
