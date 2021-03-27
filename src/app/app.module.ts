@@ -33,6 +33,7 @@ import { PreLoginComponent } from './auth/pre-login/pre-login.component';
 import { LoginComponent } from './auth/login/login.component';
 import { CustomerHomeComponent } from './customer-home/customer-home.component';
 import { ProductsComponent } from './products/products.component';
+import { AddToCartDialog } from './products/add-to-cart-dialog/add-to-cart.dialog';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ProductsComponent } from './products/products.component';
     LoginComponent,
     CustomerHomeComponent,
     ProductsComponent,
+    AddToCartDialog,
   ],
   imports: [
     CommonModule,

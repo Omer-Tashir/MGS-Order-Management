@@ -32,7 +32,17 @@ span {
   font-size: 16px;
 }
 
+.mat-option {
+  background: transparent !important;
+}
+
+mat-dialog-container, .mat-select-panel {
+  background-color: #C5C5C5 !important;
+}
+
 mat-form-field {
+  width: 100%;
+
   * {
     color: black;
   }
@@ -52,7 +62,6 @@ table,
 .mat-select-panel,
 .mat-option {
   border-collapse: collapse;
-  background: black !important;
   td.mat-cell {
     padding: 15px 0;
   }

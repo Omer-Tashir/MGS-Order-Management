@@ -1,5 +1,11 @@
-<div class="products">
-    <div class="product" *ngFor="let product of (products$ | async)">
+<div class="category-bar">
+    <div class="category" *ngFor="let category of categories">
+        <span [class.active]="category==activeCategory" (click)="activateCategory(category)">{{category}}</span>
+    </div>
+</div>
+
+<div class="products" *ngIf="(products$ | async) as products">
+    <div class="product" *ngFor="let product of filterByCategory(products, activeCategory)">
         <mat-card>
 
             <mat-card-header>
@@ -7,18 +13,17 @@
               <mat-card-subtitle>{{product.Category}}</mat-card-subtitle>
             </mat-card-header>
 
-            <img mat-card-image [src]="product.Image" alt="{{product.Name}}">
+            <img mat-card-image [ngClass]="{'hidden': !product.Image_Loaded}" (load)="product.Image_Loaded = true"
+                (error)="setDefaultPic(product)" [attr.src]="product.Image" alt="{{product.Name}}">
 
             <mat-card-content>
-                <p>ברקוד: {{product.Barcode}}</p>
-                <p>מחיר ליחידה: {{product.Price | currency: 'ILS'}}</p>
-                <p>מידה: {{product.Size}}</p>
-                <p>צבע: {{product.Color}}</p>
+                <p class="price">מחיר ליחידה: {{product.Price | currency: 'ILS'}}</p>
                 <p>כמות במלאי: {{product.Quantity}}</p>
+                <p>ברקוד: {{product.Barcode}}</p>
             </mat-card-content>
 
             <mat-card-actions>
-              <button mat-raised-button color="primary">הוסף לסל</button>
+              <button mat-raised-button color="primary" (click)="addToCart(product)">הוסף לסל</button>
             </mat-card-actions>
 
           </mat-card>
