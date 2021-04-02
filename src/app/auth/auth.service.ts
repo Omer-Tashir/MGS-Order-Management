@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { DatabaseService } from '../core/database.service';
+import { CartService } from '../core/cart.service';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +32,6 @@ export class AuthService {
       console.log(error);
     }
 
-    this.afAuth.signOut();
     this.router.navigate(['pre-login']);
   }
 }

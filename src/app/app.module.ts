@@ -28,12 +28,17 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
 
 // Shared presentation components and supporting services
+import { CartService } from './core/cart.service';
 import { DatabaseService } from './core/database.service';
 import { PreLoginComponent } from './auth/pre-login/pre-login.component';
 import { LoginComponent } from './auth/login/login.component';
 import { CustomerHomeComponent } from './customer-home/customer-home.component';
 import { ProductsComponent } from './products/products.component';
 import { AddToCartDialog } from './products/add-to-cart-dialog/add-to-cart.dialog';
+import { CartComponent } from './cart/cart.component';
+import { CustomerDetailsComponent } from './customer-details/customer-details.component';
+import { UpdateCustomerDetailsDialog } from './customer-details/update-customer-details-dialog/update-customer-details-dialog';
+import { CustomerOrdersComponent } from './customer-orders/customer-orders.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +48,10 @@ import { AddToCartDialog } from './products/add-to-cart-dialog/add-to-cart.dialo
     CustomerHomeComponent,
     ProductsComponent,
     AddToCartDialog,
+    CartComponent,
+    CustomerDetailsComponent,
+    UpdateCustomerDetailsDialog,
+    CustomerOrdersComponent,
   ],
   imports: [
     CommonModule,
@@ -60,6 +69,7 @@ import { AddToCartDialog } from './products/add-to-cart-dialog/add-to-cart.dialo
     AngularFireDatabaseModule,
   ],
   providers: [
+    CartService,
     DatabaseService,
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
     { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntl },

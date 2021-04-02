@@ -2,7 +2,7 @@ export class Item {
     Name!: string;
     Image!: string;
     Image_Loaded!: boolean;
-    Barcode!: number;
+    Barcode!: string;
     Quantity!: number;
     Price!: number;
     Class!: string;

@@ -1,0 +1,31 @@
+<ng-container *ngIf="customer">
+    <div class="customer-page" [@fadeInOnEnter]>
+
+        <h1 class="form-title">הפרטים שלי</h1>
+    
+        <div class="customer-form">
+            <p class="customer-title">פרטי התחברות
+                <button mat-raised-button color="primary" (click)="editDetails()">ערוך</button>
+            </p>
+            <div class="customer-details">
+                <p>{{customer.Name}}</p>
+                <p>{{customer.Email}}</p>
+            </div>
+
+            <p class="customer-title">כתובת למשלוח
+                <button mat-raised-button color="primary" (click)="editRegion()">ערוך</button>
+            </p>
+            <div class="customer-details">
+                <p>{{customer.Region}}</p>
+            </div>
+
+            <ng-container *ngIf="agent">
+                <p class="customer-title">פרטי סוכן</p>
+                <div class="customer-details">
+                    <p>{{agent.Name}}</p>
+                    <p>טלפון: {{agent.Phone_Num}}</p>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</ng-container>

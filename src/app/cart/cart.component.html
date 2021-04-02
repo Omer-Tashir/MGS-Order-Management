@@ -1,0 +1,58 @@
+<ng-container *ngIf="itemsInCart">
+    <ng-container *ngIf="itemsInCart.length > 0">
+      <h1 class="cart-title">עגלת קניות</h1>
+      <div class="cart-grid">
+        <div class="cart">
+          <div class="cart-item">
+              <p>פריטים</p>
+              <p>מידה</p>
+              <p>מחיר</p>
+              <p>כמות</p>
+              <p>סה״כ</p>
+          </div>
+  
+          <div class="cart-item" *ngFor="let product of itemsInCart" [@simpleFadeAnimation]="'in'">
+              <img mat-card-image [ngClass]="{'hidden': !product.Image_Loaded}" (load)="product.Image_Loaded = true"
+              (error)="setDefaultPic(product)" [attr.src]="product.Image" alt="{{product.Name}}">
+  
+              <p>{{product.Size}}</p>
+              <p>{{product.Price | currency: 'ILS' }}</p>
+              <p>{{product.Quantity}}</p>
+              <p>{{product.Quantity * product.Price | currency: 'ILS'}}</p>
+          </div>
+        </div>
+
+        <div class="total">
+          <p class="total-text">סיכום הזמנה</p>
+          <div class="total-grid">
+            <div>
+              <p>סך ביניים:</p>
+              <p>{{total | currency: 'ILS'}}</p>
+            </div>
+
+            <div>
+              <p>הנחת לקוח:</p>
+              <p>{{discount | currency: 'ILS'}}</p>
+            </div>
+
+            <div class="total-price">
+              <p>סה״כ:</p>
+              <p>{{totalWithDiscount | currency: 'ILS'}}</p>
+            </div>
+          </div>
+
+          <p class="checkout">המשך לתשלום</p>
+          <p class="continue" [routerLink]="['/products']">המשך בקניות</p>
+        </div>
+      </div>
+    
+      <div class="clear-button-container">
+        <button mat-button class="clear-button" (click)="clearCart()" [disabled]="isLoading">נקה עגלה</button>
+        <button mat-button class="purchase-button" (click)="purchase()" [disabled]="isLoading">בצע הזמנה</button>
+      </div>
+    </ng-container>
+    
+    <ng-container *ngIf="itemsInCart.length <= 0">
+      <h3 class="cart-title">העגלה שלך ריקה</h3>
+    </ng-container>
+  </ng-container>

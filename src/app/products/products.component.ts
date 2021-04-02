@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { CartService } from '../core/cart.service';
 import { DatabaseService } from '../core/database.service';
-import { Item } from '../models/item';
 import { AddToCartDialog } from './add-to-cart-dialog/add-to-cart.dialog';
+import { Item } from '../models/item';
 
 @Component({
   selector: 'app-products',
@@ -17,7 +18,8 @@ export class ProductsComponent implements OnInit {
   categories!: Set<string>;
   activeCategory: string = 'כל הקטגוריות';
 
-  constructor(private dbService: DatabaseService, public dialog: MatDialog) { }
+  constructor(private dbService: DatabaseService, private cartService: CartService, 
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.products$ = this.dbService.getItems()
@@ -50,7 +52,16 @@ export class ProductsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      let addedItem = Object.assign(new Item, item);
+      addedItem.Size = result.size;
+      addedItem.Quantity = result.quantity;
+      
+      this.cartService.addItem(addedItem).then(()=>{
+        console.log('הפריטים הוכנסו לעגלה בהצלחה');
+      }).catch(error=>{
+        console.log(error);
+        alert('שגיאה, פריט זה כבר הוכנס לעגלה עבור המידה והכמות הרצויים');
+      })
     });
   }
 }

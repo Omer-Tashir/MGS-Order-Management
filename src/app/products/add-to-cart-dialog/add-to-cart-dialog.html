@@ -25,5 +25,5 @@
 
 <div mat-dialog-actions>
   <button mat-raised-button color="primary" (click)="onNoClick()">סגור</button>
-  <button mat-raised-button color="primary" [mat-dialog-close]="form.value" cdkFocusInitial>הוסף לעגלה</button>
+  <button mat-raised-button color="primary" [disabled]="!form.valid" [mat-dialog-close]="form.value" cdkFocusInitial>הוסף לעגלה</button>
 </div>

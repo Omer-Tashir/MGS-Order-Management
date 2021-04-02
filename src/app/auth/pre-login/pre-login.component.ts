@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { fadeInOnEnterAnimation } from 'angular-animations';
+import { CartService } from 'src/app/core/cart.service';
 
 @Component({
   selector: 'app-pre-login',
@@ -9,8 +11,13 @@ import { fadeInOnEnterAnimation } from 'angular-animations';
 })
 export class PreLoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cartService: CartService, private afAuth: AngularFireAuth) { }
 
   ngOnInit(): void {
+    this.afAuth.signOut().then(()=>{
+      this.cartService.removeCart();
+    }).catch(error=>{
+      console.log(error);
+    });
   }
 }

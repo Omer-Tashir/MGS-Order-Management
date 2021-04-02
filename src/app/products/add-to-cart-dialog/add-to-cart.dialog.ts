@@ -23,4 +23,8 @@ import { Item } from 'src/app/models/item';
     onNoClick(): void {
       this.dialogRef.close();
     }
+
+    setDefaultPic(item: Item) {
+      item.Image = 'assets/default.jpeg';
+    }  
   }

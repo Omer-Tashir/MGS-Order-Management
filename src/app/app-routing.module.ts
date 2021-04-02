@@ -4,12 +4,18 @@ import { Routes, RouterModule, Router } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 import { isCustomerGuard, isLoggedInGuard } from './auth/auth.guard';
 import { CustomerHomeComponent } from './customer-home/customer-home.component';
+import { CustomerDetailsComponent } from './customer-details/customer-details.component';
+import { CustomerOrdersComponent } from './customer-orders/customer-orders.component';
 import { ProductsComponent } from './products/products.component';
+import { CartComponent } from './cart/cart.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/pre-login', pathMatch: 'full' },
   { path: 'customer-home', component: CustomerHomeComponent, canActivate: [isLoggedInGuard, isCustomerGuard] },
+  { path: 'customer/details', component: CustomerDetailsComponent, canActivate: [isLoggedInGuard, isCustomerGuard] },
+  { path: 'customer/orders', component: CustomerOrdersComponent, canActivate: [isLoggedInGuard, isCustomerGuard] },
   { path: 'products', component: ProductsComponent, canActivate: [isLoggedInGuard, isCustomerGuard] },
+  { path: 'cart', component: CartComponent, canActivate: [isLoggedInGuard, isCustomerGuard] },
 ];
 
 @NgModule({

@@ -9,6 +9,7 @@ import { Customer } from '../models/customer';
 import { Manager } from '../models/manager';
 import { Agent } from '../models/agent';
 import { Item } from '../models/item';
+import { ItemInOrder } from '../models/item-in-order';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +25,6 @@ export class DatabaseService {
           Customer_Id: doc.id,
           Agent_Id: data.agent_id,
           User_Name: data.user_name,
-          Password: data.password,
           Name: data.name,
           Phone_Num: data.phone_num,
           Email: data.email,
@@ -34,6 +34,111 @@ export class DatabaseService {
         });
       })),
       catchError(err => of([])),
+      shareReplay()
+    );
+  }
+
+  putCustomer(customer: Customer): Observable<Customer> {
+    let uid = !!customer?.Customer_Id ? customer.Customer_Id : this.db.createId();
+    return from(this.db.collection(`Customer`).doc(uid).set({
+      customer_id: uid,
+      agent_id: customer.Agent_Id,
+      user_name: customer.User_Name,
+      name: customer.Name,
+      phone_num: customer.Phone_Num,
+      email: customer.Email,
+      region: customer.Region,
+      type: customer.Type,
+      discount: customer.Discount,
+    })).pipe(
+      map(res => Object.assign(new Customer(), {
+        Customer_Id: uid,
+        Agent_Id: customer.Agent_Id,
+        User_Name: customer.User_Name,
+        Name: customer.Name,
+        Phone_Num: customer.Phone_Num,
+        Email: customer.Email,
+        Region: customer.Region,
+        Type: customer.Type,
+        Discount: customer.Discount,
+      })),
+      catchError(err=>throwError(err)),
+      shareReplay()
+    );
+  }
+
+  getOrders(): Observable<Order[]> {
+    return this.db.collection(`Order`).get().pipe(
+      map(orders => orders.docs.map(doc => {
+        let data: any = doc.data();
+        return Object.assign(new Order(), {
+          Order_Id: doc.id,
+          Customer_Id: data.customer_id,
+          Status: data.status,
+          Date_Received: data.date_received.toDate(),
+          Order_Rate: data.order_rate,
+        });
+      })),
+      catchError(err => of([])),
+      shareReplay()
+    );
+  }
+
+  putOrder(order: Order): Observable<Order> {
+    let uid = !!order?.Order_Id ? order.Order_Id : this.db.createId();
+    return from(this.db.collection(`Order`).doc(uid).set({
+      order_id: uid,
+      customer_id: order.Customer_Id,
+      status: order.Status,
+      date_received: order.Date_Received,
+      order_rate: order.Order_Rate,
+    })).pipe(
+      map(res => Object.assign(new Order(), {
+        Order_Id: uid,
+        Customer_Id: order.Customer_Id,
+        Status: order.Status,
+        Date_Received: order.Date_Received,
+        Order_Rate: order.Order_Rate,
+      })),
+      catchError(err=>throwError(err)),
+      shareReplay()
+    );
+  }
+
+  getItemsInOrder(): Observable<ItemInOrder[]> {
+    return this.db.collection(`ItemInOrder`).get().pipe(
+      map(items => items.docs.map(doc => {
+        let data: any = doc.data();
+        return Object.assign(new ItemInOrder(), {
+          Order_Id: data.order_id,
+          Barcode: data.barcode,
+          Size: data.size,
+          Quantity: data.quantity,
+          Price_For_Line: data.price_for_line,
+        });
+      })),
+      catchError(err => of([])),
+      shareReplay()
+    );
+  }
+
+  putItemInOrder(item: ItemInOrder): Observable<ItemInOrder> {
+    let uid = this.db.createId();
+    return from(this.db.collection(`ItemInOrder`).doc(uid).set({
+      order_id: item.Order_Id,
+      barcode: item.Barcode,
+      size: item.Size,
+      quantity: item.Quantity,
+      price_for_line: item.Price_For_Line,
+    })).pipe(
+      map(res => Object.assign(new ItemInOrder(), {
+        Order_Id: item.Order_Id,
+        Barcode: item.Barcode,
+        Size: item.Size,
+        Quantity: item.Quantity,
+        Price_For_Line: item.Price_For_Line,
+      })),
+      catchError(err=>throwError(err)),
       shareReplay()
     );
   }
@@ -61,7 +166,7 @@ export class DatabaseService {
   }
 
   getManagers(): Observable<Manager[]> {
-    return this.db.collection(`managers`).get().pipe(
+    return this.db.collection(`Manager`).get().pipe(
       map(managers => managers.docs.map(doc => {
         let data: any = doc.data();
         return Object.assign(new Manager(), {
@@ -74,53 +179,22 @@ export class DatabaseService {
   }
 
   getAgents(): Observable<Agent[]> {
-    return this.db.collection(`agents`).get().pipe(
+    return this.db.collection(`Agent`).get().pipe(
       map(agents => agents.docs.map(doc => {
         let data: any = doc.data();
         return Object.assign(new Agent(), {
           Agent_Id: doc.id,
-          Region: data.region
+          Region: data.region,
+          Discount: data.discount,
+          User_Name: data.user_name,
+          Name: data.name,
+          Phone_Num: data.phone_num,
+          Email: data.email,
+          Employee_Num: data.employee_num,
+          Role: data.role,
         });
       })),
       catchError(err => of([])),
-      shareReplay()
-    );
-  }
-
-  getOrders(): Observable<Order[]> {
-    return this.db.collection(`orders`).get().pipe(
-      map(orders => orders.docs.map(doc => {
-        let data: any = doc.data();
-        return Object.assign(new Order(), {
-          Order_Id: doc.id,
-          Customer_Id: data.customer_id,
-          Date_Received: data.date_received.toDate(),
-          Status: data.status,
-          Order_Rate: data.order_rate
-        });
-      })),
-      catchError(err => of([])),
-      shareReplay()
-    );
-  }
-
-  putOrder(order: Order, customer: Customer): Observable<Order> {
-    let uid = !!order?.Order_Id ? order.Order_Id : this.db.createId();
-    return from(this.db.collection(`orders`).doc(uid).set({
-      order_id: order.Order_Id,
-      customer_id: customer.Customer_Id,
-      status: order.Status,
-      date_received: order.Date_Received,
-      order_rate: order.Order_Rate
-    })).pipe(
-      map(res => Object.assign(new Order(), {
-        Order_Id: uid,
-        Customer_Id: customer.Customer_Id,
-        Date_Received: order.Date_Received,
-        Status: order.Status,
-        Order_Rate: order.Order_Rate
-      })),
-      catchError(err=>throwError(err)),
       shareReplay()
     );
   }

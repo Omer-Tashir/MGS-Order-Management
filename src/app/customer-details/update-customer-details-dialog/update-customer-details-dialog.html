@@ -1,0 +1,18 @@
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field *ngIf="data.type == 'details'">
+      <mat-label>שם</mat-label>
+      <input matInput formControlName="name" value="{{data.customer.Name}}">
+    </mat-form-field>
+
+    <mat-form-field *ngIf="data.type == 'region'">
+      <mat-label>כתובת למשלוח</mat-label>
+      <input matInput formControlName="region" value="{{data.customer.Region}}">
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="onNoClick()">סגור</button>
+  <button mat-raised-button color="primary" [disabled]="!form.valid" [mat-dialog-close]="form.value">עדכן</button>
+</div>

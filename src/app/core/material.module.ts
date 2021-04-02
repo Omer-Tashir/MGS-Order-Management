@@ -34,6 +34,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   imports: [
@@ -41,7 +42,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     BrowserModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
-    MatCheckboxModule,
+    MatBadgeModule,
     MatButtonModule,
     MatInputModule,
     MatAutocompleteModule,
@@ -77,7 +78,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     BrowserModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
-    MatCheckboxModule,
+    MatBadgeModule,
     MatButtonModule,
     MatInputModule,
     MatAutocompleteModule,

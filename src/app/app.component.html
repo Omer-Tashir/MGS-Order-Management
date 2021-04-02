@@ -1,5 +1,5 @@
 <div class="navbar">
-    <img class="logo" src="assets/top-logo.jpeg" alt="MGS">
+    <img class="logo" src="assets/top-logo.jpeg" alt="MGS" (click)="goBack()">
     <h1 class="title">מערכת הזמנות</h1>
     <div class="search-box">
       <mat-form-field class="search">
@@ -7,7 +7,10 @@
         <input type="text" matInput>
       </mat-form-field>
 
-      <mat-icon>shopping_cart</mat-icon>
+      <div [routerLink]="['/cart']" matBadge="{{getCartLength()}}" matBadgeOverlap="false" matBadgePosition="above before" class="cart">
+        <mat-icon>shopping_cart</mat-icon>
+      </div>
+
       <mat-icon>favorite</mat-icon>
       <mat-icon>phone</mat-icon>
     </div>
