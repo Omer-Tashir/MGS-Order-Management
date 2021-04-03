@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { CartService } from '../core/cart.service';
-import { DatabaseService } from '../core/database.service';
+import { CartService } from '../../core/cart.service';
+import { DatabaseService } from '../../core/database.service';
 import { AddToCartDialog } from './add-to-cart-dialog/add-to-cart.dialog';
-import { Item } from '../models/item';
+import { Item } from '../../models/item';
 
 @Component({
   selector: 'app-products',

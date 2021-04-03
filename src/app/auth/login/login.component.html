@@ -1,7 +1,7 @@
 <div class="login-page">
   <div class="login-container" [@fadeInOnEnter]>
 
-    <h1 class="form-title">{{loginType=='customers' ? 'התחברות לקוח' : 'התחברות מנהל/סוכן'}}</h1>
+    <h1 class="form-title">{{loginType=='customers' ? 'התחברות לקוח' : loginType=='agents' ? 'התחברות סוכן' : 'התחברות מנהל'}}</h1>
     
     <div class="grid-container">
       <div class="login-form-wrapper">

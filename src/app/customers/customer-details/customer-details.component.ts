@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { MatDialog } from '@angular/material/dialog';
 import { fadeInOnEnterAnimation } from 'angular-animations';
-import { DatabaseService } from '../core/database.service';
-import { Agent } from '../models/agent';
-import { Customer } from '../models/customer';
+import { DatabaseService } from '../../core/database.service';
+import { Agent } from '../../models/agent';
+import { Customer } from '../../models/customer';
 import { UpdateCustomerDetailsDialog } from './update-customer-details-dialog/update-customer-details-dialog';
 
 @Component({

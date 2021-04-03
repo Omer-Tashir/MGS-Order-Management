@@ -1,18 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 import { forkJoin, Observable } from 'rxjs';
 
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-
-import { DatabaseService } from '../core/database.service';
-import { Order } from '../models/order';
-import { Item } from '../models/item';
-import { ItemInOrder } from '../models/item-in-order';
-import { Customer } from '../models/customer';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { CartService } from '../core/cart.service';
+
+import { Order } from 'src/app/models/order';
+import { Item } from 'src/app/models/item';
+import { ItemInOrder } from 'src/app/models/item-in-order';
+import { Customer } from 'src/app/models/customer';
+import { DatabaseService } from 'src/app/core/database.service';
+import { CartService } from 'src/app/core/cart.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customer-orders',
@@ -35,7 +35,7 @@ export class CustomerOrdersComponent implements OnInit {
   isLoadingData: boolean = true;
 
   constructor(private afAuth: AngularFireAuth, private db: DatabaseService, 
-    private cartService: CartService) {}
+    private cartService: CartService, private router: Router) {}
 
   sortData(sort: Sort) {
     const data = this.dataSource.data.slice();
@@ -64,15 +64,17 @@ export class CustomerOrdersComponent implements OnInit {
   }
 
   getItemsInOrder(order: Order, items: Item[], itemsInOrder: ItemInOrder[]): Item[] {
-    let ids = itemsInOrder.filter(i=>i.Order_Id === order.Order_Id).map(i=>i.Barcode);
-    return items.filter(i=>ids.includes(i.Barcode)).map(function(item){
-      let itemInOrder = itemsInOrder.find(i=>i.Barcode == item.Barcode);
-      if(itemInOrder) {
-        item.Quantity = itemInOrder.Quantity;
-        item.Size = itemInOrder.Size;
+    let orderItems = itemsInOrder.filter(i=>i.Order_Id === order.Order_Id);
+    let arr: Item[] = [];
+    for(let i=0; i<orderItems.length; i++) {
+      let item = Object.assign(new Item, items.find(item=>item.Barcode == orderItems[i].Barcode));
+      if (item) {
+        item.Quantity = orderItems[i].Quantity;
+        item.Size = orderItems[i].Size;
+        arr.push(item);
       }
-      return item;
-    });
+    }
+    return arr;
   }
 
   ngOnInit(): void {
@@ -91,6 +93,7 @@ export class CustomerOrdersComponent implements OnInit {
               this.items$,
               this.itemsInOrder$
             ]).subscribe(data => {
+              console.log(data);
               let orders = data[0].filter(o=>o.Customer_Id == this.customer.Customer_Id);
               for(let i=0; i<orders.length; i++) {
                 orders[i].items = this.getItemsInOrder(orders[i], data[1], data[2]);
@@ -124,6 +127,8 @@ export class CustomerOrdersComponent implements OnInit {
     for(let i=0; i<order.items.length; i++) {
       this.cartService.addItem(order.items[i]);
     }
+
+    this.router.navigate(['/cart']);
   }
 
   setDefaultPic(item: Item) {

@@ -56,7 +56,11 @@ export class LoginComponent implements OnInit {
         if(this.loginType=='customers') {
           this.router.navigate(['/customer-home']);
         }
-        else {
+        else if(this.loginType=='agents') {
+          this.router.navigate(['/agent-home']);
+        }
+        else if(this.loginType=='managers') {
+          this.router.navigate(['/manager-home']);
         }
       })
       .catch((error) => {

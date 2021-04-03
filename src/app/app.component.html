@@ -1,5 +1,5 @@
 <div class="navbar">
-    <img class="logo" src="assets/top-logo.jpeg" alt="MGS" (click)="goBack()">
+    <img class="logo" src="assets/top-logo.jpeg" alt="MGS">
     <h1 class="title">מערכת הזמנות</h1>
     <div class="search-box">
       <mat-form-field class="search">
@@ -15,6 +15,8 @@
       <mat-icon>phone</mat-icon>
     </div>
 </div>
+
+<p class="go-back" (click)="goBack()"> <- חזור לדף הקודם </p>
 
 <section [@fadeInOnEnter] [@fadeOutOnLeave]>
   <router-outlet></router-outlet>

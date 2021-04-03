@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 import { from, Observable, of, throwError } from 'rxjs';
-import { catchError, map, shareReplay } from 'rxjs/operators';
+import { catchError, first, map, mergeMap, shareReplay } from 'rxjs/operators';
 
 import { Order } from '../models/order';
 import { Customer } from '../models/customer';
@@ -10,6 +10,7 @@ import { Manager } from '../models/manager';
 import { Agent } from '../models/agent';
 import { Item } from '../models/item';
 import { ItemInOrder } from '../models/item-in-order';
+import { AlgoParameters } from '../models/algo-parameters';
 
 @Injectable({
   providedIn: 'root',
@@ -31,6 +32,9 @@ export class DatabaseService {
           Region: data.region,
           Type: data.type,
           Discount: data.discount,
+          Quality_Rate: data.quality_rate,
+          Obligo_Rate: data.obligo_rate,
+          Seniority_Rate: data.seniority_rate,
         });
       })),
       catchError(err => of([])),
@@ -50,6 +54,9 @@ export class DatabaseService {
       region: customer.Region,
       type: customer.Type,
       discount: customer.Discount,
+      quality_rate: customer.Quality_Rate,
+      obligo_rate: customer.Obligo_Rate,
+      seniority_rate: customer.Seniority_Rate,
     })).pipe(
       map(res => Object.assign(new Customer(), {
         Customer_Id: uid,
@@ -61,6 +68,9 @@ export class DatabaseService {
         Region: customer.Region,
         Type: customer.Type,
         Discount: customer.Discount,
+        Quality_Rate: customer.Quality_Rate,
+        Obligo_Rate: customer.Obligo_Rate,
+        Seniority_Rate: customer.Seniority_Rate,
       })),
       catchError(err=>throwError(err)),
       shareReplay()
@@ -197,5 +207,36 @@ export class DatabaseService {
       catchError(err => of([])),
       shareReplay()
     );
+  }
+
+  getAlgoParameters(): Observable<AlgoParameters> {
+    return this.db.collection(`AlgoParameters`).get().pipe(
+      map(parameters => parameters.docs.map(doc => {
+        let data: any = doc.data();
+        return Object.assign(new AlgoParameters(), {
+          uid: doc.id,
+          CustomerObligo: data.CustomerObligo,
+          CustomerQuality: data.CustomerQuality,
+          CustomerSeniority: data.CustomerSeniority,
+          OrderItemsQuantity: data.OrderItemsQuantity,
+          OrderTimeInSystem: data.OrderTimeInSystem,
+          OrderTotalPrice: data.OrderTotalPrice
+        });
+      })),
+      first(),
+      mergeMap(r=>r),
+      shareReplay()
+    );
+  }
+
+  putAlgoParameters(uid: string, data: AlgoParameters): void {
+    this.db.collection(`AlgoParameters`).doc(uid).set({
+      CustomerObligo: data.CustomerObligo,
+      CustomerQuality: data.CustomerQuality,
+      CustomerSeniority: data.CustomerSeniority,
+      OrderItemsQuantity: data.OrderItemsQuantity,
+      OrderTimeInSystem: data.OrderTimeInSystem,
+      OrderTotalPrice: data.OrderTotalPrice
+    });
   }
 }

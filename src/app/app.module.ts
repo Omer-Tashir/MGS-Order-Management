@@ -32,13 +32,20 @@ import { CartService } from './core/cart.service';
 import { DatabaseService } from './core/database.service';
 import { PreLoginComponent } from './auth/pre-login/pre-login.component';
 import { LoginComponent } from './auth/login/login.component';
-import { CustomerHomeComponent } from './customer-home/customer-home.component';
-import { ProductsComponent } from './products/products.component';
-import { AddToCartDialog } from './products/add-to-cart-dialog/add-to-cart.dialog';
+import { ProductsComponent } from './customers/products/products.component';
+import { AddToCartDialog } from './customers/products/add-to-cart-dialog/add-to-cart.dialog';
 import { CartComponent } from './cart/cart.component';
-import { CustomerDetailsComponent } from './customer-details/customer-details.component';
-import { UpdateCustomerDetailsDialog } from './customer-details/update-customer-details-dialog/update-customer-details-dialog';
-import { CustomerOrdersComponent } from './customer-orders/customer-orders.component';
+import { CustomerDetailsComponent } from './customers/customer-details/customer-details.component';
+import { UpdateCustomerDetailsDialog } from './customers/customer-details/update-customer-details-dialog/update-customer-details-dialog';
+import { AgentHomeComponent } from './agents/agent-home/agent-home.component';
+import { CustomersComponent } from './agents/customers/customers.component';
+import { ParametersComponent } from './parameters/parameters.component';
+import { ManagerHomeComponent } from './managers/manager-home/manager-home.component';
+import { ReportsComponent } from './managers/reports/reports.component';
+import { CustomerHomeComponent } from './customers/customer-home/customer-home.component';
+import { CustomerOrdersComponent } from './customers/customer-orders/customer-orders.component';
+import { OrdersReportComponent } from './managers/reports/orders-report/orders-report.component';
+import { PriorityReportComponent } from './managers/reports/priority-report/priority-report.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +59,13 @@ import { CustomerOrdersComponent } from './customer-orders/customer-orders.compo
     CustomerDetailsComponent,
     UpdateCustomerDetailsDialog,
     CustomerOrdersComponent,
+    AgentHomeComponent,
+    CustomersComponent,
+    ParametersComponent,
+    ManagerHomeComponent,
+    ReportsComponent,
+    OrdersReportComponent,
+    PriorityReportComponent,
   ],
   imports: [
     CommonModule,

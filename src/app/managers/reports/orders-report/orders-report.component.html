@@ -1,0 +1,51 @@
+<div class="orders-table">
+    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)" matSortActive="Date_Received" matSortStart="desc" matSortDisableClear>
+
+      <ng-container matColumnDef="Customer_Name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="Customer_Name"> שם הלקוח </th>
+        <td mat-cell *matCellDef="let element">
+          {{getCustomerByOrder(element)?.Name}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Order_Id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="Order_Id"> מס׳ הזמנה </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.Order_Id}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="Price"> סכום הזמנה </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.total | currency: 'ILS'}}
+        </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="Date_Received">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="Date_Received"> תאריך </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.Date_Received | date:'dd/MM/YYYY'}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Region">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="Region"> כתובת למשלוח </th>
+        <td mat-cell *matCellDef="let element">
+          {{getCustomerByOrder(element)?.Region}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="Status"> סטטוס הזמנה </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.Status}}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>

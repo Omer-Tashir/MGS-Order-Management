@@ -6,4 +6,7 @@ export class Customer extends User {
     Region!: string;
     Type!: string;
     Discount!: number;
+    Quality_Rate!: number;
+    Obligo_Rate!: number;
+    Seniority_Rate!: number;
 }

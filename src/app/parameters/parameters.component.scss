@@ -1,0 +1,31 @@
+.parameters-page {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+    width: 50%;
+    min-width: 300px;
+  }
+
+  .parameters-form {
+    background: rgb(227 227 227 / 20%);
+    padding: 2vw 5vw;
+    display: grid;
+    gap: 10px;
+  }
+
+  .form-title {
+    text-align: center;
+    font-weight: bold !important;
+    margin-bottom: 30px;
+  }
+
+  .save-btn {
+    background-color: black;
+    margin-top: 20px;
+}
+
+.margin-top {
+    margin-top: 50px;
+}
