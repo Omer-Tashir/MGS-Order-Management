@@ -1,4 +1,7 @@
 export class AlgoParameters {
+    Customer!: number;
+    Order!: number;
+    
     CustomerObligo!: number;
     CustomerQuality!: number;
     CustomerSeniority!: number;

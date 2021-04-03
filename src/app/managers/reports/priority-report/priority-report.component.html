@@ -4,7 +4,7 @@
       <ng-container matColumnDef="Priority">
         <th mat-header-cell *matHeaderCellDef mat-sort-header="Priority"> תעדוף </th>
         <td mat-cell *matCellDef="let element">
-          {{element.Order_Rate}}
+          {{element.Order_Rate | number : '1.0-2'}}
         </td>
       </ng-container>
 

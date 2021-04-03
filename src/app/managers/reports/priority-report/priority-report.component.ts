@@ -14,6 +14,7 @@ import { DatabaseService } from 'src/app/core/database.service';
 import { CartService } from 'src/app/core/cart.service';
 
 import * as moment from 'moment/moment';
+import { AlgoParameters } from 'src/app/models/algo-parameters';
 
 @Component({
   selector: 'app-priority-report',
@@ -29,6 +30,7 @@ export class PriorityReportComponent implements OnInit {
   orders$!: Observable<Order[]>;
   items$!: Observable<Item[]>;
   itemsInOrder$!: Observable<ItemInOrder[]>;
+  algoParameters$!: Observable<AlgoParameters>;
 
   customers: Customer[] = [];
   displayedColumns: string[] = ['Priority', 'Customer_Name', 'Order_Id', 'Price', 'Date_Received', 'Region'];
@@ -86,15 +88,20 @@ export class PriorityReportComponent implements OnInit {
     this.orders$ = this.db.getOrders();
     this.items$ = this.db.getItems();
     this.itemsInOrder$ = this.db.getItemsInOrder();
+    this.algoParameters$ = this.db.getAlgoParameters();
 
     forkJoin([
       this.customers$,
       this.orders$,
       this.items$,
-      this.itemsInOrder$
+      this.itemsInOrder$,
+      this.algoParameters$
+
     ]).subscribe(data => {
       this.customers = data[0];
       let orders = data[1];
+      let algoParameters = data[4];
+
       for(let i=0; i<orders.length; i++) {
         orders[i].items = this.getItemsInOrder(orders[i], data[2], data[3]);
         let customer = this.getCustomerByOrder(orders[i]);
@@ -102,7 +109,7 @@ export class PriorityReportComponent implements OnInit {
           orders[i].total = (1 - (customer.Discount / 100)) * orders[i].items.reduce((acc, i)=>{
             return acc + (Number(i.Price) * Number(i.Quantity));
           }, 0);
-          orders[i].Order_Rate = this.getAlgorithemScore(orders[i], customer);
+          orders[i].Order_Rate = this.getAlgorithemScore(orders[i], customer, algoParameters);
         }
       }
 
@@ -117,7 +124,7 @@ export class PriorityReportComponent implements OnInit {
     });
   }
 
-  getAlgorithemScore(order: Order, customer: Customer): number {
+  getAlgorithemScore(order: Order, customer: Customer, algoParameters: AlgoParameters): number {
     let totalPriceScore: number = 0;
     if(order.total<=5000) {
       totalPriceScore = 2.5;
@@ -155,7 +162,18 @@ export class PriorityReportComponent implements OnInit {
       timeInSystemScore = 10;
     }
 
-    return 1;
+    let totalTimeInSystemScore: number = timeInSystemScore * algoParameters.OrderTimeInSystem;
+    let totalCustomerScore: number = algoParameters.Customer * (
+      algoParameters.CustomerQuality * customer.Quality_Rate +
+      algoParameters.CustomerObligo * customer.Obligo_Rate +
+      algoParameters.CustomerSeniority * customer.Seniority_Rate
+    );
+    let totalOrderScore: number = algoParameters.Order * (
+      algoParameters.OrderItemsQuantity * orderItemsScore +
+      algoParameters.OrderTotalPrice * totalPriceScore
+    );
+
+    return totalTimeInSystemScore + totalCustomerScore + totalOrderScore;
   }
 
   getCustomerByOrder(order: Order): Customer | undefined {

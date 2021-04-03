@@ -215,6 +215,9 @@ export class DatabaseService {
         let data: any = doc.data();
         return Object.assign(new AlgoParameters(), {
           uid: doc.id,
+          Customer: data.Customer,
+          Order: data.Order,
+
           CustomerObligo: data.CustomerObligo,
           CustomerQuality: data.CustomerQuality,
           CustomerSeniority: data.CustomerSeniority,
@@ -231,6 +234,9 @@ export class DatabaseService {
 
   putAlgoParameters(uid: string, data: AlgoParameters): void {
     this.db.collection(`AlgoParameters`).doc(uid).set({
+      Customer: data.Customer,
+      Order: data.Order,
+      
       CustomerObligo: data.CustomerObligo,
       CustomerQuality: data.CustomerQuality,
       CustomerSeniority: data.CustomerSeniority,

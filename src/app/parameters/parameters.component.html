@@ -4,32 +4,50 @@
 
     <div class="parameters-form">
         <mat-form-field>
-            <mat-label>איכות הלקוח:</mat-label>
-            <input matInput type="number" formControlName="CustomerQuality">
+            <mat-label>משקל עבור לקוח:</mat-label>
+            <input matInput type="number" formControlName="Customer">
         </mat-form-field>
 
-        <mat-form-field>
-            <mat-label>אובליגו:</mat-label>
-            <input matInput type="number" formControlName="CustomerObligo">
-        </mat-form-field>
+        <div class="internal-parameters">
+            <p>חלוקה פנימית:</p>
+
+            <mat-form-field>
+                <mat-label>איכות הלקוח:</mat-label>
+                <input matInput type="number" formControlName="CustomerQuality">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>אובליגו:</mat-label>
+                <input matInput type="number" formControlName="CustomerObligo">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>וותק:</mat-label>
+                <input matInput type="number" formControlName="CustomerSeniority">
+            </mat-form-field>
+        </div>
 
         <mat-form-field>
-            <mat-label>וותק:</mat-label>
-            <input matInput type="number" formControlName="CustomerSeniority">
+            <mat-label>משקל עבור ההזמנה:</mat-label>
+            <input matInput type="number" formControlName="Order">
         </mat-form-field>
 
-        <mat-form-field>
-            <mat-label>סכום ההזמנה:</mat-label>
-            <input matInput type="number" formControlName="OrderTotalPrice">
-        </mat-form-field>
+        <div class="internal-parameters">
+            <p>חלוקה פנימית:</p>
+
+            <mat-form-field>
+                <mat-label>סכום ההזמנה:</mat-label>
+                <input matInput type="number" formControlName="OrderTotalPrice">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>גודל ההזמנה:</mat-label>
+                <input matInput type="number" formControlName="OrderItemsQuantity">
+            </mat-form-field>
+        </div>
 
         <mat-form-field>
-            <mat-label>גודל ההזמנה:</mat-label>
-            <input matInput type="number" formControlName="OrderItemsQuantity">
-        </mat-form-field>
-
-        <mat-form-field>
-            <mat-label>זמן המתנה במערכת:</mat-label>
+            <mat-label>משקל עבור זמן במערכת:</mat-label>
             <input matInput type="number" formControlName="OrderTimeInSystem">
         </mat-form-field>
 
