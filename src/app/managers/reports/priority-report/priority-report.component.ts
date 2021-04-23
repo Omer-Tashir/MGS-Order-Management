@@ -116,7 +116,7 @@ export class PriorityReportComponent implements OnInit {
       this.dataSource = new MatTableDataSource(orders);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-      this.sortData({ active: 'Date_Received', direction: 'desc' });
+      this.sortData({ active: 'Priority', direction: 'desc' });
 
     }, error => {
       alert("התרחשה שגיאה, לא ניתן לטעון נתונים");

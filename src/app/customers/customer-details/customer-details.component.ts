@@ -22,7 +22,6 @@ export class CustomerDetailsComponent {
       (user) => {
         if (user && user != null) {
           this.db.getCustomers().subscribe((customers: any[]) => {
-            console.log(customers);
             this.customer = customers.find(c=>c.Customer_Id == user.uid);
             this.db.getAgents().subscribe((agents: any[]) => {
               this.agent = agents.find(a=>a.Agent_Id == this.customer.Agent_Id);

@@ -1,1 +1,79 @@
-<p>customers works!</p>
+<div class="orders-table">
+    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)" matSortActive="Name" matSortStart="desc" matSortDisableClear>
+      
+      <ng-container matColumnDef="Customer_Id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="Customer_Id"> מזהה לקוח </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.Customer_Id}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="Name"> שם </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.Name}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Phone_Num">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="Phone_Num"> טלפון </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.Phone_Num}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="Email"> אימייל </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.Email}}
+        </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="Region">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="Region"> כתובת </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.Region}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="Type"> סוג </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.Type}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Discount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="Discount"> הנחת לקוח </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.Discount}}%
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Quality_Rate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="Quality_Rate"> איכות </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.Quality_Rate}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Obligo_Rate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="Obligo_Rate"> אובליגו </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.Obligo_Rate}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Seniority_Rate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="Seniority_Rate"> ותק </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.Seniority_Rate}}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>

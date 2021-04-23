@@ -5,7 +5,7 @@
     <div class="parameters-form">
         <mat-form-field>
             <mat-label>משקל עבור לקוח:</mat-label>
-            <input matInput type="number" formControlName="Customer">
+            <input matInput type="number" formControlName="Customer" min="0" max="1" step="0.1">
         </mat-form-field>
 
         <div class="internal-parameters">
@@ -13,23 +13,23 @@
 
             <mat-form-field>
                 <mat-label>איכות הלקוח:</mat-label>
-                <input matInput type="number" formControlName="CustomerQuality">
+                <input matInput type="number" formControlName="CustomerQuality" min="0" max="1" step="0.1">
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>אובליגו:</mat-label>
-                <input matInput type="number" formControlName="CustomerObligo">
+                <input matInput type="number" formControlName="CustomerObligo" min="0" max="1" step="0.1">
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>וותק:</mat-label>
-                <input matInput type="number" formControlName="CustomerSeniority">
+                <input matInput type="number" formControlName="CustomerSeniority" min="0" max="1" step="0.1">
             </mat-form-field>
         </div>
 
         <mat-form-field>
             <mat-label>משקל עבור ההזמנה:</mat-label>
-            <input matInput type="number" formControlName="Order">
+            <input matInput type="number" formControlName="Order" min="0" max="1" step="0.1">
         </mat-form-field>
 
         <div class="internal-parameters">
@@ -37,18 +37,18 @@
 
             <mat-form-field>
                 <mat-label>סכום ההזמנה:</mat-label>
-                <input matInput type="number" formControlName="OrderTotalPrice">
+                <input matInput type="number" formControlName="OrderTotalPrice" min="0" max="1" step="0.1">
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>גודל ההזמנה:</mat-label>
-                <input matInput type="number" formControlName="OrderItemsQuantity">
+                <input matInput type="number" formControlName="OrderItemsQuantity" min="0" max="1" step="0.1">
             </mat-form-field>
         </div>
 
         <mat-form-field>
             <mat-label>משקל עבור זמן במערכת:</mat-label>
-            <input matInput type="number" formControlName="OrderTimeInSystem">
+            <input matInput type="number" formControlName="OrderTimeInSystem" min="0" max="1" step="0.1">
         </mat-form-field>
 
         <button mat-raised-button color="primary" class="save-btn" (click)="update()">שמור</button>

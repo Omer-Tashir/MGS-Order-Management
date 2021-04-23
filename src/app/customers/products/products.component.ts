@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { CartService } from '../../core/cart.service';
 import { DatabaseService } from '../../core/database.service';
 import { AddToCartDialog } from './add-to-cart-dialog/add-to-cart.dialog';
 import { Item } from '../../models/item';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Customer } from 'src/app/models/customer';
 
 @Component({
   selector: 'app-products',
@@ -14,20 +16,37 @@ import { Item } from '../../models/item';
 })
 export class ProductsComponent implements OnInit {
 
+  customer!: Customer;
   products$!: Observable<Item[]>;
   categories!: Set<string>;
   activeCategory: string = 'כל הקטגוריות';
 
-  constructor(private dbService: DatabaseService, private cartService: CartService, 
-    public dialog: MatDialog) { }
+  constructor(private dbService: DatabaseService, private afAuth: AngularFireAuth,
+    private cartService: CartService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.products$ = this.dbService.getItems()
-      .pipe(
-        tap(items=>{
-          this.categories = new Set(['כל הקטגוריות'].concat(items.map(i=>i.Category).sort()));
-        })
-      );
+    this.afAuth.authState.subscribe(
+      (user) => {
+        if (user && user != null) {
+          this.dbService.getCustomers().subscribe((customers: any[]) => {
+            this.customer = customers.find(c=>c.Customer_Id == user.uid);
+            this.products$ = this.dbService.getItems()
+            .pipe(
+              map(items=>items.filter(i=>i.Class == this.customer.Type)),
+              tap(items=>{
+                this.categories = new Set(['כל הקטגוריות'].concat(items.map(i=>i.Category).sort()));
+              })
+            );
+          },
+          (error) => {
+            console.log(error);
+          });
+        } 
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   filterByCategory(products: Item[], category: string) {

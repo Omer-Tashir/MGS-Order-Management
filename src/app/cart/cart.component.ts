@@ -35,6 +35,7 @@ import { forkJoin } from 'rxjs';
 })
 export class CartComponent {
   customer!: Customer;
+  items: Array<Item> = new Array<Item>();
   itemsInCart: Array<Item> = new Array<Item>();
   isLoading: boolean = false;
   total: number = 0;
@@ -58,6 +59,10 @@ export class CartComponent {
             },
             (error) => {
               console.log(error);
+            });
+
+            this.db.getItems().subscribe(items => {
+              this.items = items;
             });
           } 
         },
@@ -92,12 +97,15 @@ export class CartComponent {
     }
   }
 
+  getItemStockQuantity(itemInCart: Item): number {
+    return this.items.find(i=>i.Barcode === itemInCart.Barcode)?.Quantity ?? 0;
+  }
+
   purchase(){
     let order = new Order;
     order.Customer_Id = this.customer.Customer_Id;
     order.Date_Received = new Date();
     order.Status = 'ההזמנה התקבלה';
-    order.Order_Rate = 0;
 
     this.db.putOrder(order).subscribe(result=>{
       let forkArr = [];
@@ -110,6 +118,7 @@ export class CartComponent {
         itemInOrder.Barcode = item.Barcode;
         itemInOrder.Size = item.Size;
         forkArr.push(this.db.putItemInOrder(itemInOrder));
+        forkArr.push(this.db.updateItemQuantity(this.itemsInCart[i], this.getItemStockQuantity(this.itemsInCart[i]) - this.itemsInCart[i].Quantity));
       }
 
       forkJoin(forkArr).subscribe(data=>{

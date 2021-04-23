@@ -86,7 +86,6 @@ export class DatabaseService {
           Customer_Id: data.customer_id,
           Status: data.status,
           Date_Received: data.date_received.toDate(),
-          Order_Rate: data.order_rate,
         });
       })),
       catchError(err => of([])),
@@ -101,14 +100,12 @@ export class DatabaseService {
       customer_id: order.Customer_Id,
       status: order.Status,
       date_received: order.Date_Received,
-      order_rate: order.Order_Rate,
     })).pipe(
       map(res => Object.assign(new Order(), {
         Order_Id: uid,
         Customer_Id: order.Customer_Id,
         Status: order.Status,
         Date_Received: order.Date_Received,
-        Order_Rate: order.Order_Rate,
       })),
       catchError(err=>throwError(err)),
       shareReplay()
@@ -174,6 +171,14 @@ export class DatabaseService {
       shareReplay()
     );
   }
+
+
+  updateItemQuantity(item: Item, quantity: number): Observable<void> {
+    return from(this.db.collection(`Item`).doc(item.Barcode).update({
+      quantity: quantity,
+    }))
+  }
+
 
   getManagers(): Observable<Manager[]> {
     return this.db.collection(`Manager`).get().pipe(

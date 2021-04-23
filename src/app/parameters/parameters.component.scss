@@ -1,11 +1,8 @@
-.parameters-page {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    /* bring your own prefixes */
-    transform: translate(-50%, -50%);
+  .parameters-page {
+    display: block;
+    margin: auto;
+    margin-bottom: 75px;
     width: 50%;
-    min-width: 300px;
   }
 
   .parameters-form {

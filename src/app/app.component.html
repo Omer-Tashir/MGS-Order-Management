@@ -1,5 +1,5 @@
 <div class="navbar">
-    <img class="logo" src="assets/top-logo.jpeg" alt="MGS">
+    <img class="logo" src="assets/top-logo.jpeg" alt="MGS" (click)="goHome()">
     <h1 class="title">מערכת הזמנות</h1>
     <div class="search-box">
       <mat-form-field class="search">
@@ -7,7 +7,7 @@
         <input type="text" matInput>
       </mat-form-field>
 
-      <div [routerLink]="['/cart']" matBadge="{{getCartLength()}}" matBadgeOverlap="false" matBadgePosition="above before" class="cart">
+      <div *ngIf="!!customer" [routerLink]="['/cart']" matBadge="{{getCartLength()}}" matBadgeOverlap="false" matBadgePosition="above before" class="cart">
         <mat-icon>shopping_cart</mat-icon>
       </div>
 
