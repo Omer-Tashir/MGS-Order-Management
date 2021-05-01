@@ -5,7 +5,7 @@ export class Item {
     Barcode!: string;
     Quantity!: number;
     Price!: number;
-    Class!: string;
+    Class!: string[];
     Catalog_Num!: string;
     Size!: string[];
     Color!: string;

@@ -32,7 +32,7 @@ export class ProductsComponent implements OnInit {
             this.customer = customers.find(c=>c.Customer_Id == user.uid);
             this.products$ = this.dbService.getItems()
             .pipe(
-              map(items=>items.filter(i=>i.Class == this.customer.Type)),
+              map(items=>items.filter(i=>i.Class.some(c=>this.customer.Type.indexOf(c) >= 0))),
               tap(items=>{
                 this.categories = new Set(['כל הקטגוריות'].concat(items.map(i=>i.Category).sort()));
               })

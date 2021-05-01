@@ -46,6 +46,7 @@ export class AppComponent {
             this.db.getManagers()
           ]).subscribe(
             result => {
+              console.log(result);
               if(result[0].find(r=>r.Customer_Id === user.uid)) {
                 this.customer = result[0].find(r=>r.Customer_Id === user.uid);
               }
@@ -86,5 +87,11 @@ export class AppComponent {
 
   goBack() {
     this.location.back();
+  }
+
+  logout() {
+    this.afAuth.signOut().then(()=>{
+      this.router.navigate(['/']);
+    });
   }
 }

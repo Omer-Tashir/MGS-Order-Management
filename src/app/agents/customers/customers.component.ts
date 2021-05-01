@@ -51,7 +51,7 @@ export class CustomersComponent implements OnInit {
         case 'Phone_Num': return this.compare(a.Phone_Num, b.Phone_Num, isAsc);
         case 'Email': return this.compare(a.Email, b.Email, isAsc);
         case 'Region': return this.compare(a.Region, b.Region, isAsc);
-        case 'Type': return this.compare(a.Type, b.Type, isAsc);
+        case 'Type': return this.compare(a.Type?.toString(), b.Type?.toString(), isAsc);
         case 'Discount': return this.compare(a.Discount, b.Discount, isAsc);
         case 'Quality_Rate': return this.compare(a.Quality_Rate, b.Quality_Rate, isAsc);
         case 'Obligo_Rate': return this.compare(a.Obligo_Rate, b.Obligo_Rate, isAsc);
